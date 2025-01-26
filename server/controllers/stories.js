@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 import Story from "../models/storyContent.js";
 
+// Function to get all stories from the database
 const getStories = async (req, res) => {
 
     try {
+        // Fetch all stories from the Story model
         const story = await Story.find();
         res.status(200).json(story);
     } catch (error) {
@@ -12,10 +14,12 @@ const getStories = async (req, res) => {
 
 }
 
+// Function to create a new story and save it to the database
 const createStory = async (req, res) => {
     console.log(req.body);
     const body = req.body;
 
+    // Create a new instance of the Story model with the request body
     const newStory = new Story({
         ...body
     });
@@ -30,6 +34,7 @@ const createStory = async (req, res) => {
 
 }
 
+// Function to update an existing story by its ID
 const updateStory = async (req, res) => {
     const { id: _id } = req.params;
 
@@ -44,6 +49,7 @@ const updateStory = async (req, res) => {
     res.json(updatedStory);
 }
 
+// Function to delete a story by its ID
 const deleteStory = async (req, res) => {
     const { id } = req.params;
 
@@ -56,6 +62,7 @@ const deleteStory = async (req, res) => {
     res.json({ message: "Story deleted successfully" });
 }
 
+// Function to increment the like count of a story by its ID
 const likeStory = async (req, res) => {
     const { id } = req.params;
 
@@ -73,5 +80,5 @@ const likeStory = async (req, res) => {
 }
 
 
-
+// Export all functions so they can be used in routes
 export { getStories, createStory, updateStory, deleteStory, likeStory };
