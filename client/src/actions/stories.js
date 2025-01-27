@@ -9,8 +9,10 @@ import {
 export const getStories = () => async (dispatch) => {
     try {
         const { data } = await api.fetchStories();
+        // Dispatch success action with data
         dispatch({ type: FETCH_ALL_STORIES, payload: data });
     } catch (error) {
+        // Log the error for debugging
         console.log(error.message)
     }
 };
