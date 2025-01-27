@@ -74,7 +74,10 @@ const likeStory = async (req, res) => {
         if (!story) {
             return res.status(404).send("Story not found");
         }
-    const updatedStory = await Story.findByIdAndUpdate(id, { likes: story.likes + 1 }, { new: true });
+        // Atomically increment the like count using `$inc`
+    const updatedStory = await Story.findByIdAndUpdate(
+        id, { $inc: { likes: 1 } }, // Increment likes by 1 atomically
+        { new: true });
 
     res.json(updatedStory);
 }
