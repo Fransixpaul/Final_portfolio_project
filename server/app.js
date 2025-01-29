@@ -30,8 +30,6 @@ const connectDB = async () => {
   }
 };
 
-console.log(process.env.MONGO_URI);
-
 connectDB();
 
 mongoose.connection.on("open", () => console.log("Connection to database has been established successfully"));
