@@ -1,3 +1,23 @@
+/**
+ * API utility functions for story CRUD operations.
+ *
+ * This module provides functions to interact with the backend API for stories:
+ * - Fetching all stories
+ * - Creating a new story
+ * - Updating a story
+ * - Deleting a story
+ * - Liking a story
+ *
+ * Functions:
+ *  - fetchStories()       - Fetch all stories.
+ *  - createStory(story)   - Create a new story.
+ *  - updateStory(id, story) - Update an existing story.
+ *  - deleteStory(id)      - Delete a story.
+ *  - likeStory(id)        - Like a story.
+ *
+ * @module api/stories
+ */
+
 import axios from "axios";
 
 const url = "http://localhost:5001/stories";
