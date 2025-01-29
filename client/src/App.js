@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Image, Typography } from 'antd';
-import Logo from './images/Instaverse.png';
+import Logo from './images/moment.png';
 import Home from './components/Home';
 import styles from './styles';
 
