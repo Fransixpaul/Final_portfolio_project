@@ -6,52 +6,37 @@ import {
     DELETE_STORY
 } from "../constants/actionTypes";
 
+// Helper function to handle API requests and dispatch actions
+const handleApiRequest = async (apiCall, params, actionType, dispatch) => {
+    try {
+        const { data } = await apiCall(...params);
+        dispatch({ type: actionType, payload: data });
+    } catch (error) {
+        console.error(error.message);  // Log error to console for debugging
+    }
+};
+
+// Fetch all stories
 export const getStories = () => async (dispatch) => {
-    try {
-        const { data } = await api.fetchStories();
-        // Dispatch success action with data
-        dispatch({ type: FETCH_ALL_STORIES, payload: data });
-    } catch (error) {
-        // Log the error for debugging
-        console.log(error.message)
-    }
+    handleApiRequest(api.fetchStories, [], FETCH_ALL_STORIES, dispatch);
 };
 
+// Create a new story
 export const createStory = (story) => async (dispatch) => {
-    try {
-        const { data } = await api.createStory(story);
-        dispatch({ type: CREATE_STORY, payload: data });
-    } catch (error) {
-        console.log(error.message)
-    }
+    handleApiRequest(api.createStory, [story], CREATE_STORY, dispatch);
 };
 
+// Update an existing story
 export const updateStory = (id, story) => async (dispatch) => {
-    try {
-        const { data } = await api.updateStory(id, story);
-
-        dispatch({ type: UPDATE_STORY, payload: data });
-    } catch (error) {
-        console.log(error.message)
-    }
+    handleApiRequest(api.updateStory, [id, story], UPDATE_STORY, dispatch);
 };
 
+// Delete a story
 export const deleteStory = (id) => async (dispatch) => {
-    try {
-        await api.deleteStory(id);
-
-        dispatch({ type: DELETE_STORY, payload: id });
-    } catch (error) {
-        console.log(error.message)
-    }
+    handleApiRequest(api.deleteStory, [id], DELETE_STORY, dispatch);
 };
 
+// Like a specific story
 export const likeStory = (id) => async (dispatch) => {
-    try {
-        const { data } = await api.likeStory(id);
-
-        dispatch({ type: UPDATE_STORY, payload: data });
-    } catch (error) {
-        console.log(error.message)
-    }
+    handleApiRequest(api.likeStory, [id], UPDATE_STORY, dispatch);
 };
